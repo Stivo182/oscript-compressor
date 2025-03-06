@@ -27,7 +27,7 @@ jobs:
           dotnet-version: 8.x.x
       
       - name: Установка OneScript
-        uses: otymko/setup-onescript@v1.4
+        uses: otymko/setup-onescript@master
         with:
           version: ${{ matrix.oscript_version }}
 

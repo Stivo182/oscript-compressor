@@ -14,7 +14,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-latest]
+        os: [macOS-latest, ubuntu-latest, windows-latest]
         oscript_version: [stable, dev]
         
     steps:
@@ -27,7 +27,7 @@ jobs:
           dotnet-version: 8.x.x
       
       - name: Установка OneScript
-        uses: Stivo182/setup-onescript@master
+        uses: Stivo182/setup-onescript@fix/macos
         with:
           version: ${{ matrix.oscript_version }}
 

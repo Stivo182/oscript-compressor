@@ -9,7 +9,7 @@
 	.Версия("1.0.2")
 	.Автор("Dmitry Ivanov")
 	.АдресАвтора("https://github.com/Stivo182")
-	.Описание("Библиотека сжатия данных, включающая алгоритмы LZ4, Snappy, Zstd, Brotli, GZip, ZLib и Deflate")
+	.Описание("Библиотека для сжатия и распаковки данных в среде OneScript, поддерживающая алгоритмы LZ4, Snappy, Zstd, Brotli, GZip, ZLib и Deflate")
 	.ВерсияСреды("1.9.2")
 	.ВключитьФайл("Components")
 	.ВключитьФайл("docs")

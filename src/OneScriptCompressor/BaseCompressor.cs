@@ -77,7 +77,7 @@ namespace OneScriptCompressor
 
         private IValue BaseCompressBuffer(BinaryDataContext binaryData, IValue outputStream = null)
         {
-            if (outputStream is null)
+            if (IsNullOrUndefined(outputStream))
             {
                 return new BinaryDataContext(CompressBuffer(binaryData.Buffer));
             }
@@ -87,14 +87,14 @@ namespace OneScriptCompressor
             }
             else
             {
-                throw RuntimeException.InvalidArgumentType("data");
+                throw RuntimeException.InvalidArgumentType("outputStream");
             }
             return null;
         }
 
         private IValue BaseCompressStream(IStreamWrapper inputStream, IValue outputStream = null)
         {
-            if (outputStream is null)
+            if (IsNullOrUndefined(outputStream))
             {
                 return new BinaryDataContext(CompressStreamIntoBuffer(inputStream.GetUnderlyingStream()));
             }
@@ -104,14 +104,14 @@ namespace OneScriptCompressor
             }
             else
             {
-                throw RuntimeException.InvalidArgumentType("data");
+                throw RuntimeException.InvalidArgumentType("outputStream");
             }
             return null;
         }
 
         private IValue BaseDecompressBuffer(BinaryDataContext binaryData, IValue outputStream = null)
         {
-            if (outputStream is null)
+            if (IsNullOrUndefined(outputStream))
             {
                 return new BinaryDataContext(DecompressBuffer(binaryData.Buffer));
             }
@@ -121,14 +121,14 @@ namespace OneScriptCompressor
             }
             else
             {
-                throw RuntimeException.InvalidArgumentType("data");
+                throw RuntimeException.InvalidArgumentType("outputStream");
             }
             return null;
         }
 
         private IValue BaseDecompressStream(IStreamWrapper inputStream, IValue outputStream = null)
         {
-            if (outputStream is null)
+            if (IsNullOrUndefined(outputStream))
             {
                 return new BinaryDataContext(DecompressStreamIntoBuffer(inputStream.GetUnderlyingStream()));
             }
@@ -138,7 +138,7 @@ namespace OneScriptCompressor
             }
             else
             {
-                throw RuntimeException.InvalidArgumentType("data");
+                throw RuntimeException.InvalidArgumentType("outputStream");
             }
             return null;
         }
@@ -189,6 +189,18 @@ namespace OneScriptCompressor
         protected virtual void DecompressStream(Stream inputStream, Stream outputStream)
         {
             _compressor.Decompress(inputStream, outputStream);
+        }
+
+        private bool IsNullOrUndefined(IValue value)
+        {
+            if (value is null)
+                return true;
+
+#if NET48
+            return value is ScriptEngine.Machine.Values.UndefinedValue;
+#else
+            return value is OneScript.Values.BslUndefinedValue;
+#endif
         }
 
         static Assembly AssemblyResolve(object sender, ResolveEventArgs args)

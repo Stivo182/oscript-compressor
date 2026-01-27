@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net48;net6.0;</TargetFrameworks>
+		<TargetFrameworks>net48;net8.0;</TargetFrameworks>
 		<LangVersion>10.0</LangVersion>
 		<PackageProjectUrl>https://github.com/Stivo182/oscript-compressor</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/Stivo182/oscript-compressor</RepositoryUrl>
@@ -21,8 +21,8 @@
 		<PackageReference Include="EasyCompressor.ZstdSharp" Version="2.1.0" />
 	</ItemGroup>
 	
-	<ItemGroup Condition="'$(TargetFramework)'=='net6.0'">
-		<PackageReference Include="OneScript.StandardLibrary" Version="2.0.0-rc6" />
+	<ItemGroup Condition="'$(TargetFramework)'=='net8.0'">
+		<PackageReference Include="OneScript.StandardLibrary" Version="2.0.0" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)'=='net48'">

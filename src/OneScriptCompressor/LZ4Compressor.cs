@@ -3,7 +3,7 @@ using ScriptEngine.Machine.Contexts;
 using K4os.Compression.LZ4;
 using EasyCompressor;
 
-#if NET6_0
+#if NET8_0_OR_GREATER
 using OneScript.Contexts;
 #endif
 

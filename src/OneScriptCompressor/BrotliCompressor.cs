@@ -24,7 +24,7 @@ namespace OneScriptCompressor
         /// </summary>
         public BrotliCompressor()
         {
-#if NET6_0
+#if NET8_0_OR_GREATER
            _compressor = new EasyCompressor.BrotliCompressor();
 #endif
         }

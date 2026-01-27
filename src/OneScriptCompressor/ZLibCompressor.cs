@@ -34,7 +34,7 @@ namespace OneScriptCompressor
         public ZLibCompressor(DataCompressionLevel level)
         {
             _level = level;
-#if NET6_0
+#if NET8_0_OR_GREATER
             _compressor = new EasyCompressor.ZLibCompressor((CompressionLevel)(int)level);
 #endif
         }

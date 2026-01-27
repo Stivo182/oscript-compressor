@@ -2,7 +2,7 @@
 using ScriptEngine.Machine.Contexts;
 using System.IO;
 
-#if NET6_0
+#if NET8_0_OR_GREATER
 using OneScript.Contexts;
 #endif
 

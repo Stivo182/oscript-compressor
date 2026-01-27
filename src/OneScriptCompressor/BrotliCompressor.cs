@@ -52,11 +52,8 @@ namespace OneScriptCompressor
 
         protected override void CompressBufferIntoStream(byte[] buffer, Stream outputStream)
         {
-            using (var brotliStream = new BrotliStream(outputStream, CompressionMode.Compress, leaveOpen: true))
-            {
-                brotliStream.WriteAllBytes(buffer);
-            }
-            outputStream.Flush();
+            using var brotliStream = new BrotliStream(outputStream, CompressionMode.Compress, leaveOpen: true);
+            brotliStream.WriteAllBytes(buffer);
         }
 
         protected override byte[] CompressStreamIntoBuffer(Stream inputStream)
@@ -72,29 +69,22 @@ namespace OneScriptCompressor
 
         protected override void CompressStream(Stream inputStream, Stream outputStream)
         {
-            using (var brotliStream = new BrotliStream(outputStream, CompressionMode.Compress, leaveOpen: true))
-            {
-                inputStream.CopyTo(brotliStream);
-            }
-            outputStream.Flush();
+            using var brotliStream = new BrotliStream(outputStream, CompressionMode.Compress, leaveOpen: true);
+            inputStream.CopyTo(brotliStream);
         }
 
         protected override byte[] DecompressBuffer(byte[] buffer)
         {
             using var inputStream = new MemoryStream(buffer);
-            using var brotliStream = new BrotliStream(inputStream, CompressionMode.Decompress, leaveOpen: true);
-
+            using var brotliStream = new BrotliStream(inputStream, CompressionMode.Decompress);
             return brotliStream.ReadAllBytes();
         }
 
         protected override void DecompressBufferIntoStream(byte[] buffer, Stream outputStream)
         {
             using var inputStream = new MemoryStream(buffer);
-            using (var brotliStream = new BrotliStream(inputStream, CompressionMode.Decompress, leaveOpen: true))
-            {
-                brotliStream.CopyTo(outputStream);
-            }
-            outputStream.Flush();
+            using var brotliStream = new BrotliStream(inputStream, CompressionMode.Decompress);
+            brotliStream.CopyTo(outputStream);
         }
 
         protected override byte[] DecompressStreamIntoBuffer(Stream inputStream)
@@ -109,11 +99,8 @@ namespace OneScriptCompressor
 
         protected override void DecompressStream(Stream inputStream, Stream outputStream)
         {
-            using (var brotliStream = new BrotliStream(inputStream, CompressionMode.Decompress, leaveOpen: true))
-            {
-                brotliStream.CopyTo(outputStream);
-            }
-            outputStream.Flush();
+            using var brotliStream = new BrotliStream(inputStream, CompressionMode.Decompress, leaveOpen: true);
+            brotliStream.CopyTo(outputStream);
         }
 #endif
     }

@@ -72,11 +72,8 @@ namespace OneScriptCompressor
 
         protected override void CompressBufferIntoStream(byte[] buffer, Stream outputStream)
         {
-            using (var zlibStream = new ZlibStream(outputStream, CompressionMode.Compress, ConvertedCompressionLevel(), leaveOpen: true))
-            {
-                zlibStream.WriteAllBytes(buffer);
-            }
-            outputStream.Flush();
+            using var zlibStream = new ZlibStream(outputStream, CompressionMode.Compress, ConvertedCompressionLevel(), leaveOpen: true);
+            zlibStream.WriteAllBytes(buffer);
         }
 
         protected override byte[] CompressStreamIntoBuffer(Stream inputStream)
@@ -86,35 +83,27 @@ namespace OneScriptCompressor
             {
                 inputStream.CopyTo(zlibStream);
             }
-
             return outputStream.GetTrimmedBuffer();
         }
 
         protected override void CompressStream(Stream inputStream, Stream outputStream)
         {
-            using (var zlibStream = new ZlibStream(outputStream, CompressionMode.Compress, ConvertedCompressionLevel(), leaveOpen: true))
-            {
-                inputStream.CopyTo(zlibStream);
-            }
-            outputStream.Flush();
+            using var zlibStream = new ZlibStream(outputStream, CompressionMode.Compress, ConvertedCompressionLevel(), leaveOpen: true);
+            inputStream.CopyTo(zlibStream);
         }
 
         protected override byte[] DecompressBuffer(byte[] buffer)
         {
             using var inputStream = new MemoryStream(buffer);
-            using var zlibStream = new ZlibStream(inputStream, CompressionMode.Decompress, ConvertedCompressionLevel(), leaveOpen: true);
-
+            using var zlibStream = new ZlibStream(inputStream, CompressionMode.Decompress, ConvertedCompressionLevel());
             return zlibStream.ReadAllBytes();
         }
 
         protected override void DecompressBufferIntoStream(byte[] buffer, Stream outputStream)
         {
             using var inputStream = new MemoryStream(buffer);
-            using (var zlibStream = new ZlibStream(inputStream, CompressionMode.Decompress, ConvertedCompressionLevel(), leaveOpen: true))
-            {
-                zlibStream.CopyTo(outputStream);
-            }
-            outputStream.Flush();
+            using var zlibStream = new ZlibStream(inputStream, CompressionMode.Decompress, ConvertedCompressionLevel());
+            zlibStream.CopyTo(outputStream);
         }
 
         protected override byte[] DecompressStreamIntoBuffer(Stream inputStream)
@@ -129,11 +118,8 @@ namespace OneScriptCompressor
 
         protected override void DecompressStream(Stream inputStream, Stream outputStream)
         {
-            using (var zlibStream = new ZlibStream(inputStream, CompressionMode.Decompress, ConvertedCompressionLevel(), leaveOpen: true))
-            {
-                zlibStream.CopyTo(outputStream);
-            }
-            outputStream.Flush();
+            using var zlibStream = new ZlibStream(inputStream, CompressionMode.Decompress, ConvertedCompressionLevel(), leaveOpen: true);
+            zlibStream.CopyTo(outputStream);
         }
 
         private Ionic.Zlib.CompressionLevel ConvertedCompressionLevel()

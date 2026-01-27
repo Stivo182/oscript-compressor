@@ -193,12 +193,30 @@ namespace OneScriptCompressor
 
         static Assembly AssemblyResolve(object sender, ResolveEventArgs args)
         {
-            var assembly = Assembly.GetExecutingAssembly();
-            string libPath = Path.Combine(
-                    Path.GetDirectoryName(assembly.Location),
-                    new AssemblyName(args.Name).Name + ".dll");
+            try
+            {
+                var assemblyName = new AssemblyName(args.Name);
+                var assembly = Assembly.GetExecutingAssembly();
+                var assemblyDirectory = Path.GetDirectoryName(assembly.Location);
+                
+                if (string.IsNullOrEmpty(assemblyDirectory))
+                {
+                    return null;
+                }
 
-            return Assembly.LoadFile(libPath);
+                var libPath = Path.Combine(assemblyDirectory, assemblyName.Name + ".dll");
+
+                if (!File.Exists(libPath))
+                {
+                    return null;
+                }
+
+                return Assembly.LoadFile(libPath);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
     }
 }

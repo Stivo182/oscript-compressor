@@ -1,5 +1,9 @@
 # compressor
 
+[![Release](https://img.shields.io/github/release/Stivo182/oscript-compressor.svg)](https://github.com/Stivo182/oscript-compressor/releases)
+[![Тестирование](https://github.com/Stivo182/oscript-compressor/actions/workflows/test.yml/badge.svg)](https://github.com/Stivo182/oscript-compressor/actions/workflows/test.yml)
+[![Used by](https://litrosbadges.ru/package/compressor.svg)](https://litrosbadges.ru/package/compressor)
+
 Библиотека для сжатия и распаковки данных в среде OneScript, поддерживающая алгоритмы **LZ4**, **Snappy**, **Zstd**, **Brotli**, **GZip**, **ZLib** и **Deflate**. 
 
 Реализовано с использованием .NET библиотек [EasyCompressor](https://github.com/mjebrahimi/EasyCompressor/) и [BrotliSharpLib](https://github.com/master131/BrotliSharpLib).
